@@ -6,7 +6,7 @@ async function CreateStripeSession(req, res) {
   const redirectURL =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : 'https://stripe-checkout-next-js-demo.vercel.app';
+      : 'https://stripe-checkout-ten.vercel.app/';
 
   const transformedItem = {
     price_data: {
@@ -15,7 +15,7 @@ async function CreateStripeSession(req, res) {
         images: [item.image],
         name: item.name,
       },
-      unit_amount: item.price * 100,
+      unit_amount: item.price*100,
     },
     description: item.description,
     quantity: item.quantity,
@@ -29,7 +29,7 @@ async function CreateStripeSession(req, res) {
     cancel_url: redirectURL + '?status=cancel',
     metadata: {
       images: item.image,
-    },
+    }
   });
 
   res.json({ id: session.id });
